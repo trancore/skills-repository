@@ -1,0 +1,27 @@
+# OS metadata
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Local editor and agent state
+/.idea/
+/.serena/
+*.swp
+*.swo
+*~
+
+# Local environment variables (keep example files)
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Python environments and caches
+/.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Generated verification videos, screenshots, reports, and logs
+/artifacts/
