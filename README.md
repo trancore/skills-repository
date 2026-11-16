@@ -1,6 +1,6 @@
 # skills-repository
 
-開発作業で使う、日本語のAgent Skills集です。Git操作、コードレビュー、テスト戦略・実装、PRの動作確認、リポジトリ指示ファイルの作成、フロントエンドの実装前調査と検証・フィードバック、セキュリティ上の問題の調査を支援します。
+開発作業で使う、日本語のAgent Skills集です。Git操作、コードレビュー、テスト戦略・実装、PRの動作確認、リポジトリ指示ファイルの作成、フロントエンドの実装前調査と検証・フィードバック、Modern Web Guidanceを使った実装・レビュー、セキュリティ上の問題の調査を支援します。
 
 [Agent Skills仕様](https://agentskills.io/specification)に沿って、各スキルを `SKILL.md` と必要な付属資料で構成しています。Agent Skills対応ツールの仕様に従って配置し、利用できます。特定のエージェントに依存するメタデータや表現を整理しました。
 
@@ -21,6 +21,7 @@
 | [repo-instructions-generator](skills/repo-instructions-generator/SKILL.md)   | 実在する設定やコードを根拠に、指定形式の指示ファイルを作成・更新                  |
 | [frontend-context-engineering](skills/frontend-context-engineering/SKILL.md) | 実装前の情報収集と、根拠・未確認事項を分けた短いブリーフの作成                    |
 | [frontend-harness-engineering](skills/frontend-harness-engineering/SKILL.md) | 既存の検証手段の選択・実行、失敗の切り分け・修正・再確認                          |
+| [google-modern-web-guidance](skills/google-modern-web-guidance/SKILL.md)     | 公式CLIで関連ガイドを検索・取得し、Webの実装・改善・レビューに反映                  |
 | [repository-security-review](skills/repository-security-review/SKILL.md)     | セキュリティ関連URLや報告とコード・設定・依存関係を照合し、該当性と成立条件を報告 |
 
 ## 構成
@@ -36,7 +37,7 @@ skills-repository/
     │   ├── SKILL.md
     │   └── references/
     │       └── report-format.md
-    └── …（全14スキル）
+    └── …（全15スキル）
 ```
 
 `SKILL.md` のYAML frontmatterにスキル名と説明、本文に利用場面と手順を記載しています。付属資料はスキルディレクトリからの相対パスで参照します。
@@ -57,6 +58,8 @@ frontend-context-engineering を使って、対象画面の改修に必要な情
 
 frontend-harness-engineering を使って、今回のUI変更に合った既存の検証を選び、結果と未確認事項を報告してください。
 
+google-modern-web-guidance を使って、ダイアログを外側のクリックで閉じる実装を追加し、対応ブラウザと必要なフォールバックも確認してください。
+
 repository-security-review を使って、共有したアドバイザリがこのリポジトリに該当するか調べ、根拠と未確認事項を報告してください。
 
 repo-instructions-generator を使って、このリポジトリの設定やコードに基づく
@@ -67,7 +70,7 @@ pr-verification-video を使って、このPRを実アプリで確認し、動�
 
 スキル間の参照はスキル名で示しています。参照先も使う場合は、対応するスキルを同じ利用環境へ配置してください。利用できない参照先はその旨を報告し、実行した扱いにしないでください。
 
-フロントエンド向けの2スキルは独立して利用できます。`frontend-context-engineering` は読み取りによる情報収集と整理を担当し、`frontend-harness-engineering` は既存の検証手段を使った実行・フィードバックと依頼範囲内の修正を担当します。
+フロントエンド向けの3スキルは独立して利用できます。`frontend-context-engineering` は読み取りによる情報収集と整理を担当し、`frontend-harness-engineering` は既存の検証手段を使った実行・フィードバックと依頼範囲内の修正を担当します。`google-modern-web-guidance` はGoogleが公開するModern Web Guidanceの公式CLIから関連ガイドを読み込み、実装・改善・レビューへ反映します。レビューのみの依頼ではコードを編集しません。公式スキルやガイド本文、CLI本体は同梱していません。
 
 `repository-security-review` は、共有資料とリポジトリの証拠を照合する防御的な調査・報告用です。URLの閲覧と安全なローカル静的確認の範囲で、確認済み・可能性あり・情報不足を区別します。実サービスへの攻撃や悪用、コード修正、外部への報告・連絡は行いません。
 
@@ -82,6 +85,7 @@ pr-verification-video を使って、このPRを実アプリで確認し、動�
 | テストの実装・実行        | 対象プロジェクトのSDK、既存テストランナー、必要なテスト用DB・サービス・ブラウザなど                                   |
 | 動作確認動画              | 実アプリの起動・操作・録画機能、必要な認証情報、動画変換が必要ならFFmpegなど                                          |
 | 画像による回帰検証        | 画像比較ランナー、基準画像、固定したフォント・描画環境                                                                |
+| Modern Web Guidance       | Node.js 22以上、npx、コマンド実行機能、公式CLIとガイドを取得するためのネットワーク接続                                 |
 | セキュリティ調査          | リポジトリの読み取り機能、URLがある場合は関連資料の閲覧手段。任意の静的確認には、安全性を確認できる既存のローカル手段 |
 
 利用環境で使えるCLI、API、ブラウザ・OS操作機能を選び、対象リポジトリの既存設定を優先します。必要な機能や権限がなければ、未実行の作業と理由を報告します。コマンドやツール名が本文にあっても、その機能が利用環境に提供されているか確認してから使用してください。
